@@ -1,0 +1,18 @@
+{
+  "Toujours l\u00e9gitime":{
+    "AP":0.0147455159,
+    "AUC ROC":0.5,
+    "Pr\u00e9cision":0.0,
+    "Rappel":0.0,
+    "F1":0.0,
+    "Taux faux positifs":0.0
+  },
+  "Boosting pond\u00e9r\u00e9":{
+    "AP":0.2162869258,
+    "AUC ROC":0.8947888195,
+    "Pr\u00e9cision":0.1615302869,
+    "Rappel":0.5322128852,
+    "F1":0.2478395565,
+    "Taux faux positifs":0.0413457004
+  }
+}

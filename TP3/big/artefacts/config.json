@@ -1,0 +1,11 @@
+{
+  "modele": "Régression logistique",
+  "dossier_modele": "modele_sentiment_spark",
+  "colonnes_entree": [
+    "title",
+    "body"
+  ],
+  "classe_positive": 1,
+  "fraction_donnees": 1.0,
+  "fichier_metriques": "metriques_test.json"
+}

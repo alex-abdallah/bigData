@@ -1,0 +1,8 @@
+* text=auto
+*.csv.gz binary
+*.crc binary
+*.parquet binary
+TP1/data/*.txt -text
+TP2/data/**/*.csv -text
+TP3/big/artefacts/modele_sentiment_spark/** -text
+TP3/big/artefacts/predictions/** -text

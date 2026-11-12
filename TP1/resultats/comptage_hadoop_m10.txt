@@ -1,0 +1,10 @@
+arbre	850
+chat	910
+chien	1080
+ciel	1030
+fleur	1160
+livre	1050
+maison	1130
+mer	950
+montagne	1020
+soleil	820

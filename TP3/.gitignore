@@ -1,0 +1,8 @@
+.venv/
+.venv-linux/
+__pycache__/
+.ipynb_checkpoints/
+/small/bank_fraud_dataset/*.csv
+/big/amazon_reviews_dataset/*.csv
+/big/artefacts/rapide/
+spark-warehouse/

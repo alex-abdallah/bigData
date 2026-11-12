@@ -1,0 +1,10 @@
+arbre	85
+chat	91
+chien	108
+ciel	103
+fleur	116
+livre	105
+maison	113
+mer	95
+montagne	102
+soleil	82

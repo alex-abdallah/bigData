@@ -1,0 +1,4 @@
+pyspark==4.0.1
+matplotlib==3.10.3
+ipykernel==6.29.5
+nbconvert==7.16.6

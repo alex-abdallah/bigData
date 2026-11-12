@@ -1,0 +1,10 @@
+arbre	85000
+chat	91000
+chien	108000
+ciel	103000
+fleur	116000
+livre	105000
+maison	113000
+mer	95000
+montagne	102000
+soleil	82000
