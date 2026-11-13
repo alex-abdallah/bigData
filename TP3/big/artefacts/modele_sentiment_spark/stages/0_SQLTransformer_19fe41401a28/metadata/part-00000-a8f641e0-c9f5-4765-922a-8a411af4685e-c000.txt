@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.SQLTransformer","timestamp":1794553696620,"sparkVersion":"4.0.1","uid":"SQLTransformer_19fe41401a28","paramMap":{"statement":"\n    SELECT *, trim(regexp_replace(\n        regexp_replace(lower(concat_ws(' ', title, body)), r'\\\\[nr]', ' '),\n        r'\\s+', ' '\n    )) AS text FROM __THIS__\n"},"defaultParamMap":{}}

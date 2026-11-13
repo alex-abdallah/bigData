@@ -70,14 +70,14 @@ Le corpus Amazon Polarity fournit **3,6 millions d’avis pour l’apprentissage
 | Étape | Ce que fait le notebook |
 |---|---|
 | **Data** | Lit `train.csv` et `test.csv` avec Spark et un schéma explicite. |
-| **EDA** | Agrège les classes, les champs vides et les longueurs des avis. Seuls les agrégats servent aux graphiques. |
-| **Prétraitement** | Normalise les textes avec Spark SQL et enlève les doublons, y compris les avis du test déjà présents dans l’apprentissage. |
-| **Transformation** | Tokenise les avis et construit des vecteurs TF-IDF avec `HashingTF` et `IDF`. |
-| **ML** | Entraîne une régression logistique dans un pipeline Spark ML. |
-| **Évaluation** | Compare le modèle à la classe majoritaire sur le test nettoyé et affiche la matrice de confusion et les scores par classe. |
-| **Déploiement** | Exporte le `PipelineModel`, le recharge et écrit les prédictions d’un lot d’avis. |
+| **EDA** | Agrège les classes et les champs vides, puis compare les distributions et les quantiles de longueur. |
+| **Prétraitement** | Normalise les textes avec Spark SQL. Un audit chiffre les exclusions : données invalides, répétitions, étiquettes contradictoires et avis du test déjà vus en apprentissage. |
+| **Transformation** | Tokenise les avis et construit des vecteurs TF-IDF avec `HashingTF` et `IDF`. Trois avis réels illustrent la transformation en vecteurs creux. |
+| **ML** | Entraîne une régression logistique et un Naïve Bayes multinomial sur les mêmes vecteurs TF-IDF. |
+| **Évaluation** | Compare les deux modèles à la classe majoritaire. Analyse la matrice de confusion, les courbes ROC et précision-rappel, les seuils et les erreurs par longueur. |
+| **Déploiement** | Exporte et recharge le `PipelineModel` de régression logistique, puis écrit les prédictions d’un lot d’avis. |
 
-**Résultats sur 399 914 avis de test après nettoyage.** La régression logistique classe correctement **90,49 %** des avis et atteint un **F1 macro de 0,9049**. La classe majoritaire obtient **50,01 %** de classifications correctes et un **F1 macro de 0,3334**. Le pipeline a été ajusté en **5 min 14 s** sous Ubuntu WSL avec Java 21, Spark 4.0.1, quatre threads et 6 Go pour le pilote. [Métriques du test](big/artefacts/metriques_test.json) · [Graphique EDA](big/artefacts/eda.png)
+**Résultats sur 399 914 avis de test après nettoyage.** La régression logistique classe correctement **90,49 %** des avis et atteint un **F1 macro de 0,9049**. Naïve Bayes obtient **82,85 %** d’accuracy et un **F1 macro de 0,8284**. La classe majoritaire atteint **50,01 %** et un **F1 macro de 0,3334**. Sur les 400 000 avis de test bruts, 4 répétitions internes et 82 avis déjà vus en apprentissage ont été retirés. Le notebook complet a été exécuté sous Ubuntu WSL avec Java 21, Spark 4.0.1, quatre threads et 6 Go pour le pilote. [Métriques du test](big/artefacts/metriques_test.json) · [Graphique EDA](big/artefacts/eda.png)
 
 ![Matrice de confusion, précision et rappel des deux classes sur le test Amazon](big/artefacts/evaluation.png)
 

@@ -2,7 +2,11 @@
   "fraction": 1.0,
   "n_train": 3599659,
   "n_test": 399914,
-  "secondes_fit": 313.9489372190001,
+  "secondes_fit": 151.75049027800003,
+  "durees_classifieurs": {
+    "logistique": 151.75049027800003,
+    "naive_bayes": 12.488975202999995
+  },
   "matrice": [
     [
       180211,
@@ -37,8 +41,40 @@
         0.9084617615585403
       ],
       "f1_macro": 0.904910780025528,
-      "auc_roc": 0.9625558254882518,
-      "auc_pr": 0.9611302887148303
+      "auc_roc": 0.9625542697693403,
+      "auc_pr": 0.9611315333928945
+    },
+    "naive_bayes": {
+      "accuracy": 0.8284681206459389,
+      "precision": [
+        0.8197466061585805,
+        0.8376751549793875
+      ],
+      "rappel": [
+        0.8420512974411299,
+        0.8148883399505955
+      ],
+      "f1_macro": 0.8284369555793832,
+      "auc_roc": 0.8950330616034778,
+      "auc_pr": 0.8738037884590384
+    }
+  },
+  "audit_nettoyage": {
+    "train": {
+      "brut": 3600000,
+      "Texte ou \u00e9tiquette invalide": 2,
+      "R\u00e9p\u00e9titions": 337,
+      "Labels contradictoires": 2,
+      "D\u00e9j\u00e0 vu en apprentissage": 0,
+      "retenus": 3599659
+    },
+    "test": {
+      "brut": 400000,
+      "Texte ou \u00e9tiquette invalide": 0,
+      "R\u00e9p\u00e9titions": 4,
+      "Labels contradictoires": 0,
+      "D\u00e9j\u00e0 vu en apprentissage": 82,
+      "retenus": 399914
     }
   }
 }
