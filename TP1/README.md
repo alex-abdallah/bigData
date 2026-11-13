@@ -5,13 +5,14 @@
 
 ## Objectif
 
-Implémenter et comparer quatre méthodes de comptage des occurrences
+Implémenter et comparer cinq méthodes de comptage des occurrences
 de mots dans un fichier :
 
 1. Python séquentiel simple.
 2. Pseudo-MapReduce en Python.
 3. Hadoop MapReduce.
-4. Apache Spark avec PySpark.
+4. PySpark RDD avec `flatMap` et `reduceByKey`.
+5. PySpark DataFrame avec `explode` et `groupBy().count()`.
 
 ## Fichiers de test
 
@@ -27,7 +28,7 @@ Ce fichier est dupliqué m fois pour produire les tailles suivantes :
 | 100 | 100 000 |
 | 1 000 | 1 000 000 |
 
-Les mêmes fichiers sont utilisés pour les quatre méthodes.
+Les mêmes fichiers sont utilisés pour les cinq méthodes.
 Les quatre fichiers d’origine sont inclus ; le notebook peut aussi les régénérer à partir de la même graine.
 
 ## Contenu du dépôt
@@ -41,7 +42,7 @@ Les quatre fichiers d’origine sont inclus ; le notebook peut aussi les régén
 
 Installer les dépendances du [projet](../README.md), ouvrir le [notebook](TP_ComptageMots.ipynb) et sélectionner **Run All**.
 
-- Les deux méthodes Python et PySpark recalculent les comptes et les temps sur les quatre volumes. PySpark utilise deux threads locaux.
+- Les deux méthodes Python et les deux méthodes PySpark recalculent les comptes sur les quatre volumes. Les durées affichées sont les médianes de trois essais. Les deux versions PySpark tournent dans la même session à deux threads, après échauffement.
 - Hadoop relit les comptages produits par les jobs de l’expérience originale et compare chaque compte au résultat Python. Le temps affiché est la médiane des trois mesures archivées dans [temps_hadoop.csv](resultats/temps_hadoop.csv).
 
 ### Refaire le calcul Hadoop avec Docker

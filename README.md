@@ -6,8 +6,8 @@ Trois travaux pratiques : comparer des moteurs de calcul, analyser des données 
 
 | TP | Sujet | Notebooks |
 |:---|:---|:---|
-| [TP1 · Comptage de mots](TP1/) | Python, pseudo-MapReduce, Hadoop et PySpark sur quatre volumes. | [Comptage de mots](TP1/TP_ComptageMots.ipynb) |
-| [TP2 · Accidents routiers](TP2/) | Accidents en Australie-Méridionale de 2012 à 2019 : RDD, DataFrame et Spark SQL. | [Road Crash](TP2/Road_Crash_PySpark.ipynb) |
+| [TP1 · Comptage de mots](TP1/) | Python, pseudo-MapReduce, Hadoop et PySpark (RDD et DataFrame) sur quatre volumes. | [Comptage de mots](TP1/TP_ComptageMots.ipynb) |
+| [TP2 · Accidents routiers](TP2/) | Accidents en Australie-Méridionale de 2012 à 2019, avec comparaison des API Spark et analyse de la gravité. | [Road Crash](TP2/Road_Crash_PySpark.ipynb) |
 | [TP3 · Cycle d’un projet data](TP3/) | Fraude bancaire avec pandas et scikit-learn ; sentiment de quatre millions d’avis Amazon avec Spark. | [Small · Fraude](TP3/small/TP3_small_fraude_bancaire.ipynb) · [Big · Avis Amazon](TP3/big/TP3_big_sentiment_amazon_spark.ipynb) |
 
 ## Lancer les notebooks
@@ -44,6 +44,6 @@ Les copies exécutées vont dans `/tmp/bigdata-verification`. Les modèles et le
 
 **Vérification :** les quatre notebooks ont été exécutés du début à la fin sous Ubuntu WSL avec Python 3.12, Java 21 et Spark 4.0.1. Le test du TP3 Big a utilisé les quatre millions d’avis en entrée, avec les réglages par défaut.
 
-**TP1 :** le mode par défaut recalcule les deux méthodes Python et PySpark. Il relit les résultats Hadoop de l’expérience originale et vérifie leurs comptes mot par mot. Le [README du TP1](TP1/README.md) explique comment refaire les mesures Hadoop avec Docker.
+**TP1 :** le mode par défaut recalcule les deux méthodes Python et les deux méthodes PySpark. Il relit les résultats Hadoop de l’expérience originale et vérifie leurs comptes mot par mot. Le [README du TP1](TP1/README.md) explique comment refaire les mesures Hadoop avec Docker.
 
 **TP3 Big :** pour une démonstration plus courte, définir `TP3_BIG_FRACTION=0.02` avant de démarrer le noyau. Les résultats de cet essai sont écrits dans un dossier séparé.

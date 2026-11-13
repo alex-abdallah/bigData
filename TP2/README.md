@@ -24,12 +24,13 @@ Il s’appuie sur le tutoriel de Rakesh Nain, dont les cellules de code sont rep
 1. Préparation de l’environnement et vérification des données incluses.
 2. Analyse avec les RDD.
 3. Analyse avec les DataFrames.
-4. Requêtes Spark SQL.
-5. Comparaison des trois approches.
-6. Contrôles de cohérence et visualisations.
-7. Conclusion et export des résultats.
+4. Gravité et indicateurs alcool et stupéfiants.
+5. Équivalence des requêtes RDD, DataFrame et SQL.
+6. Évolution annuelle, jour de semaine et gravité par heure.
+7. Plans d’exécution et chronométrage d’une jointure avec les trois API.
+8. Conclusion et export des résultats.
 
-Les analyses portent notamment sur l’âge des personnes associées aux unités impliquées, les types d’accidents, leur gravité, les indicateurs d’alcool et de stupéfiants, ainsi que l’évolution annuelle.
+L’étude porte sur **127 672 accidents** et **272 591 unités**. Les deux tables sont reliées par `REPORT_ID`. Le benchmark mesure trois fois la même jointure et agrégation par localité après échauffement, avec vérification des résultats à chaque essai.
 
 ## Technologies
 
@@ -45,7 +46,7 @@ Ouvrir le fichier [Road_Crash_PySpark.ipynb](Road_Crash_PySpark.ipynb) pour cons
 
 ## Exécution
 
-Installer les dépendances du [projet](../README.md), puis lancer **Run All**. Pour Spark sous Windows, utiliser Ubuntu dans WSL. Les 16 CSV de 2012 à 2019 sont inclus dans [data/](data/), avec leurs empreintes SHA-256 et la documentation d’origine. Les exports CSV et Parquet sont écrits dans `resultats_road_crash/`.
+Installer les dépendances du [projet](../README.md), puis lancer **Run All**. Pour Spark sous Windows, utiliser Ubuntu dans WSL. Les 16 CSV de 2012 à 2019 sont inclus dans [data/](data/), avec leurs empreintes SHA-256 et la documentation d’origine. Les exports CSV et Parquet sont écrits dans `resultats_road_crash/`, y compris `benchmark_api_spark.csv` et `gravite_par_heure.csv`.
 
 L’ancien chargement par motif `*.csv` pouvait appeler la bibliothèque native Hadoop de Windows et échouer avec `NativeIO$Windows.access0`. Le notebook fournit désormais les chemins exacts à Spark et lit directement les données locales.
 
