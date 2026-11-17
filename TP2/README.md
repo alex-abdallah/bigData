@@ -35,7 +35,7 @@ utilisées par le notebook. Les définitions et les codes de gravité figurent d
 |:---|:---|
 | Data | Valider les empreintes et les en-têtes des 16 CSV. Comparer les effectifs des lecteurs RDD et DataFrame. |
 | Prétraitement | Vérifier les deux clés et rapprocher le nombre d’unités et de victimes des totaux d’accident. Construire l’heure, la vitesse limite et la cible. |
-| EDA | Mesurer les effectifs et les parts de gravité par année, type, jour, heure, signalement, vitesse et conditions. Cartographier les accidents géolocalisés. |
+| EDA | Mesurer les effectifs et les parts de gravité par année, type, jour, heure, signalement, vitesse et conditions. |
 | Transformation | Vérifier que les trois API renvoient les mêmes lignes à Adelaide et pour les accidents impliquant une unité sans permis. |
 | ML | Entraîner deux modèles jusqu’en 2017. Retenir le meilleur selon l’AUC PR sur 2018 et fixer le seuil de décision sur cette même période. |
 | Éval | Évaluer le modèle sur 2019, afficher la matrice de confusion et analyser les erreurs par condition de lumière. |
@@ -57,17 +57,12 @@ utilisées par le notebook. Les définitions et les codes de gravité figurent d
 | Bilan et gravité | 53 255 victimes, dont 781 décès. On compte 5 597 accidents graves ou mortels sur 127 672. |
 | Décès selon le type de collision | Les chocs contre un obstacle fixe totalisent le plus de décès (245). Les collisions frontales ont le taux le plus élevé parmi les types comptant au moins 200 accidents (65,20 décès pour 1 000 accidents). |
 | Variation selon l’heure | Le volume culmine à 17 h (11 642 accidents). La plus forte part de cas graves ou mortels se situe à 2 h (9,47 % sur 940 accidents). |
-| Couverture de la carte | 123 801 accidents sont localisés et répartis dans 552 cellules de 25 km. |
 
 Les taux par vitesse limite sont accompagnés d’intervalles de Wilson à 95 % et calculés pour les
 valeurs comptant au moins 200 accidents. La vitesse limite désigne la vitesse autorisée sur le lieu
 de l’accident. Les signalements d’alcool et de stupéfiants sont décrits avec leurs effectifs et leurs
 parts de gravité. Ces résultats portent sur les accidents enregistrés, avec les conditions et les
 signalements disponibles dans les CSV.
-
-La carte agrège les coordonnées projetées en cellules de 25 km et indique la couverture des
-coordonnées. Rapportée au trafic ou aux distances parcourues, la répartition pourrait servir
-à étudier l’exposition par zone. L’instantané fourni permet de représenter le volume observé.
 
 ## 4. Modèle de gravité
 
