@@ -1,6 +1,8 @@
+x-hadoop-image: &hadoop-image apache/hadoop@sha256:af361b20bec0dfb13f03279328572ba764926e918c4fe716e197b8be2b08e37f
+
 services:
   namenode:
-    image: apache/hadoop:3
+    image: *hadoop-image
     hostname: namenode
     command: ["hdfs", "namenode"]
     ports:
@@ -13,14 +15,14 @@ services:
       - ./data:/data
 
   datanode:
-    image: apache/hadoop:3
+    image: *hadoop-image
     hostname: datanode
     command: ["hdfs", "datanode"]
     env_file:
       - ./config
 
   resourcemanager:
-    image: apache/hadoop:3
+    image: *hadoop-image
     hostname: resourcemanager
     command: ["yarn", "resourcemanager"]
     ports:
@@ -29,7 +31,7 @@ services:
       - ./config
 
   nodemanager:
-    image: apache/hadoop:3
+    image: *hadoop-image
     hostname: nodemanager
     command: ["yarn", "nodemanager"]
     env_file:

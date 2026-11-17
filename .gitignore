@@ -2,4 +2,6 @@
 __pycache__/
 .ipynb_checkpoints/
 spark-warehouse/
+/TP1/.cache/
+/TP1/data/mots_m10000.txt
 /TP2/resultats_road_crash/

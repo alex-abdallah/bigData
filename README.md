@@ -26,9 +26,13 @@ bigData/
 ├── TP1/
 │   ├── README.md                         Méthodes et mesures
 │   ├── TP_ComptageMots.ipynb               Comptage et comparaison
-│   ├── WordCountHadoop.java               Job Hadoop MapReduce local
-│   ├── wordcount_spark.py                 Comptage RDD autonome
-│   ├── data/                             Quatre fichiers de 1 000 à 1 000 000 lignes
+│   ├── wordcount.py                      Comptage Python séquentiel
+│   ├── mapreduce_wordcount.py            Phases map, shuffle et reduce en Python
+│   ├── hadoop_wordcount.py               Lancement du WordCount officiel et lecture des compteurs
+│   ├── wordcount_spark.py                 Comptage PySpark en RDD et DataFrame
+│   ├── requirements.txt                  Dépendances du TP1
+│   ├── compose.yaml                      Services de l’expérience HDFS/YARN
+│   ├── data/                             Quatre fichiers fournis, cinquième généré à 10 millions de lignes
 │   └── resultats/                        Journaux et mesures de l’expérience HDFS/YARN
 ├── TP2/
 │   ├── README.md                         Analyses et résultats
@@ -66,14 +70,14 @@ Les phases portent les titres `## [Data]`, `## [EDA]`, `## [Prétraitement]`,
 
 | TP | Résultat observé |
 |:---|:---|
-| **TP1** | Les quatre méthodes retrouvent les mêmes occurrences aux quatre tailles. À un million de lignes, les médianes sont de 0,790 s en Python séquentiel, 1,463 s en PySpark RDD, 1,185 s en pseudo-MapReduce et 7,736 s en Hadoop local. |
+| **TP1** | Les quatre méthodes donnent les mêmes occurrences sur cinq volumes, de 1 000 à 10 millions de lignes. PySpark DataFrame atteint une médiane de 1,804 s sur le plus grand fichier dans la série publiée. Le notebook compare aussi les deux modes Hadoop, les cœurs et le cache Spark. |
 | **TP2** | Les trois API concordent sur deux requêtes. En comptant chaque accident une seule fois, la requête sur les unités sans permis donne 2 053 victimes. En 2019, le modèle détecte 253 des 839 accidents graves ou mortels au seuil fixé sur 2018. |
 | **TP3 Small** | PySpark et pandas retrouvent les mêmes effectifs et valeurs manquantes. Sur le dernier mois, le boosting pondéré retrouve 760 fraudes sur 1 428, pour 3 945 fausses alertes et une average precision de 0,2163. |
 | **TP3 Big** | Après dédoublonnage, la régression logistique atteint 90,49 % d’exactitude et 0,9049 de F1 macro sur 399 914 avis du test officiel. |
 
 ## 5. Réexécuter les notebooks
 
-**Prérequis.** Python 3.11 ou 3.12 et un JDK 17 ou 21 fournissant `java` et `javac`. Le fichier
+**Prérequis.** Python 3.11 ou 3.12 et Java 17 ou 21. Le fichier
 `requirements.txt` installe PySpark 4.0.1 et les bibliothèques Python des quatre notebooks.
 Les corpus sont fournis dans le dépôt, qui représente près de 900 Mo de données. [Documentation Spark 4.0.1](https://spark.apache.org/docs/4.0.1/)
 
@@ -83,13 +87,13 @@ Les corpus sont fournis dans le dépôt, qui représente près de 900 Mo de donn
 | Windows | Dans le terminal Ubuntu via WSL, à la racine du dépôt. |
 
 L’exécution intégrale sur les données complètes a été vérifiée dans Ubuntu via WSL avec Python 3.12,
-Java 21 et Spark 4.0.1. Hadoop utilise le moteur local fourni avec PySpark pour le TP1.
+Java 21 et Spark 4.0.1. Le TP1 lance le WordCount d’Apache Hadoop en mode local par défaut.
+Le même programme a aussi été vérifié avec HDFS et YARN. [Modes Hadoop du TP1](TP1/README.md#3-installation-et-réexécution)
 Sur Windows avec VS Code, ouvrir le dossier dans la session WSL pour sélectionner le noyau de cette session.
 
 ```bash
 python3 --version
 java -version
-javac -version
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
