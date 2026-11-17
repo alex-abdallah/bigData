@@ -33,15 +33,15 @@ utilisées par le notebook. Les définitions et les codes de gravité figurent d
 
 | Étape | Traitement et vérification |
 |:---|:---|
-| `[Data]` | Valider les empreintes et les en-têtes des 16 CSV. Comparer les effectifs des lecteurs RDD et DataFrame. |
-| `[Prétraitement]` | Vérifier les deux clés et rapprocher le nombre d’unités et de victimes des totaux d’accident. Construire l’heure, la vitesse limite et la cible. |
-| `[EDA]` | Mesurer les effectifs et les parts de gravité par année, type, jour, heure, signalement, vitesse et conditions. Cartographier les accidents géolocalisés. |
-| `[Transformation]` | Vérifier que les trois API renvoient les mêmes lignes à Adelaide et pour les accidents impliquant une unité sans permis. |
-| `[ML]` | Entraîner deux modèles jusqu’en 2017. Retenir le meilleur selon l’AUC PR sur 2018 et fixer le seuil de décision sur cette même période. |
-| `[Éval]` | Évaluer le modèle sur 2019, afficher la matrice de confusion et analyser les erreurs par condition de lumière. |
-| `[Déploiement]` | Sauvegarder le pipeline complet, le recharger et vérifier les scores et les décisions sur cinq contextes. |
-| `[Benchmark]` | Refaire la requête du permis à un et quatre cœurs, puis faire varier les partitions de shuffle en contrôlant les sorties. |
-| `[Conclusion]` | Résumer les corrections, les résultats et le périmètre des mesures. |
+| Data | Valider les empreintes et les en-têtes des 16 CSV. Comparer les effectifs des lecteurs RDD et DataFrame. |
+| Prétraitement | Vérifier les deux clés et rapprocher le nombre d’unités et de victimes des totaux d’accident. Construire l’heure, la vitesse limite et la cible. |
+| EDA | Mesurer les effectifs et les parts de gravité par année, type, jour, heure, signalement, vitesse et conditions. Cartographier les accidents géolocalisés. |
+| Transformation | Vérifier que les trois API renvoient les mêmes lignes à Adelaide et pour les accidents impliquant une unité sans permis. |
+| ML | Entraîner deux modèles jusqu’en 2017. Retenir le meilleur selon l’AUC PR sur 2018 et fixer le seuil de décision sur cette même période. |
+| Éval | Évaluer le modèle sur 2019, afficher la matrice de confusion et analyser les erreurs par condition de lumière. |
+| Déploiement | Sauvegarder le pipeline complet, le recharger et vérifier les scores et les décisions sur cinq contextes. |
+| Benchmark | Refaire la requête du permis à un et quatre cœurs, puis faire varier les partitions de shuffle en contrôlant les sorties. |
+| Conclusion | Résumer les corrections, les résultats et le périmètre des mesures. |
 
 | Problème dans la démarche initiale | Correction appliquée |
 |:---|:---|

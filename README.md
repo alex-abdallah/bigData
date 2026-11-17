@@ -64,9 +64,8 @@ produit ses propres exports. Chaque README décrit les fichiers nécessaires à 
 | Explications, commentaires et conclusions | Le texte introduit les traitements, interprète les sorties et conclut chaque étude. |
 | README à la racine | Ce document relie les fichiers de remise et les guides de chaque TP. |
 
-Les phases portent les titres `## [Data]`, `## [EDA]`, `## [Prétraitement]`,
-`## [Transformation]`, `## [ML]`, `## [Éval]` et `## [Déploiement]`. Une cellule
-`## [Conclusion]` ferme chacun des trois notebooks balisés.
+Les titres des notebooks des TP2 et TP3 repèrent les étapes Data, EDA, Prétraitement,
+Transformation, ML, Éval et Déploiement. Une section Conclusion ferme chacun de ces trois notebooks.
 
 ## 4. Résultats en un coup d’œil
 
