@@ -1,66 +1,54 @@
-# TP — Comptage de mots avec Hadoop MapReduce et PySpark
+# TP1 — Comptage de mots
 
-**Auteur :** Alex Abdallah  
-**Cours :** Fondements et Applications de Big Data
+**Auteur :** Alex Abdallah · ID16 · **Date :** 17 novembre 2026
 
-## Objectif
+**Notebook :** [TP_ComptageMots.ipynb](TP_ComptageMots.ipynb)
 
-Implémenter et comparer cinq méthodes de comptage des occurrences
-de mots dans un fichier :
+Le même corpus est traité par quatre méthodes. Le notebook vérifie chaque compte avant de comparer les temps.
 
-1. Python séquentiel simple.
-2. Pseudo-MapReduce en Python.
-3. Hadoop MapReduce.
-4. PySpark RDD avec `flatMap` et `reduceByKey`.
-5. PySpark DataFrame avec `explode` et `groupBy().count()`.
+| Méthode | Principe |
+|:---|:---|
+| Python séquentiel | Lecture par ligne et mise à jour d’un dictionnaire. |
+| PySpark | Extraction des mots en RDD et agrégation par `reduceByKey`. La variante DataFrame fournit une vérification supplémentaire. |
+| Python pseudo-MapReduce | Émission, regroupement et réduction des paires dans un processus Python. |
+| Hadoop MapReduce | Job Java avec mapper, combiner et reducer exécuté par le moteur Hadoop `LocalJobRunner`. |
 
-## Fichiers de test
-
-Le fichier initial contient 1 000 lignes, avec un mot par ligne
-et des répétitions.
-
-Ce fichier est dupliqué m fois pour produire les tailles suivantes :
-
-| Facteur m | Nombre de lignes |
-|---:|---:|
-| 1 | 1 000 |
-| 10 | 10 000 |
-| 100 | 100 000 |
-| 1 000 | 1 000 000 |
-
-Les mêmes fichiers sont utilisés pour les cinq méthodes.
-Les quatre fichiers d’origine sont inclus ; le notebook peut aussi les régénérer à partir de la même graine.
-
-## Contenu du dépôt
-
-- `TP_ComptageMots.ipynb` : explications, code, tests, comparaison et conclusions.
-- `compose.yaml` : configuration des services Hadoop.
-- `config` : paramètres HDFS, YARN et MapReduce.
-- `wordcount_spark.py` : programme de comptage avec PySpark.
+Les [fichiers fournis](data/) contiennent 1 000, 10 000, 100 000 et 1 000 000 de lignes, avec le
+même vocabulaire de dix mots. Trois essais par méthode et par volume donnent 48 comptages vérifiés.
+La comparaison affiche la médiane. Spark est initialisé hors mesure ; chaque essai Hadoop inclut
+le lancement de Java et l’écriture des comptes sur disque. Ces courbes décrivent le traitement
+sur un poste, au vocabulaire et aux volumes étudiés.
 
 ## Exécution
 
-Installer les dépendances du [projet](../README.md), ouvrir le [notebook](TP_ComptageMots.ipynb) et sélectionner **Run All**.
+Installer l’[environnement commun](../README.md#réexécuter-les-notebooks), puis lancer toutes les
+cellules depuis la racine ou `TP1/`. Le JDK compile [WordCountHadoop.java](WordCountHadoop.java)
+avec les bibliothèques Hadoop de PySpark. Le notebook utilise un répertoire temporaire pour le job
+et sa sortie. Le [script RDD autonome](wordcount_spark.py) se lance aussi avec
+`python TP1/wordcount_spark.py` depuis la racine.
 
-- Les deux méthodes Python et les deux méthodes PySpark recalculent les comptes sur les quatre volumes. Les durées affichées sont les médianes de trois essais. Les deux versions PySpark tournent dans la même session à deux threads, après échauffement.
-- Hadoop relit les comptages produits par les jobs de l’expérience originale et compare chaque compte au résultat Python. Le temps affiché est la médiane des trois mesures archivées dans [temps_hadoop.csv](resultats/temps_hadoop.csv).
+## Expérience HDFS/YARN
 
-### Refaire le calcul Hadoop avec Docker
-
-Depuis `TP1/`, avec Docker et Compose démarrés :
+Le dossier [`resultats/`](resultats/) conserve les comptes, mesures et journaux de l’expérience
+HDFS/YARN initiale avec Hadoop 3.3.6. Ses durées sont distinctes des mesures du mode local ci-dessus.
+Pour relancer un job de cette expérience, démarrer [les services Docker](compose.yaml) depuis
+`TP1/` et attendre un DataNode actif et un nœud YARN `RUNNING` :
 
 ```bash
-docker compose pull
 docker compose up -d
 docker compose exec -T namenode hdfs dfsadmin -report
 docker compose exec -T resourcemanager yarn node -list
-export TP1_HADOOP_LIVE=1
+
+docker compose exec -T namenode hdfs dfs -mkdir -p /tp/input
+docker compose exec -T namenode hdfs dfs -put -f /data/mots_m1.txt /tp/input/
+sortie="/tp/resultat_m1_$(date +%s)"
+docker compose exec -T namenode bash -lc \
+  'hadoop jar /opt/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-*.jar wordcount "$1" "$2"' \
+  _ /tp/input/mots_m1.txt "$sortie"
+docker compose exec -T namenode hdfs dfs -cat "$sortie/part-r-*"
+docker compose stop
 ```
 
-Quand HDFS voit un DataNode actif et YARN un nœud `RUNNING`, lancer le notebook depuis un environnement qui hérite de cette variable. La cellule Hadoop copie elle-même les fichiers dans HDFS et lance un job par volume. Une fois l’expérience terminée, utiliser `docker compose stop`.
-
-Le dossier [resultats](resultats/) conserve les comptes, les temps et les journaux de l’expérience Hadoop. Le [programme PySpark original](wordcount_spark.py) est aussi fourni.
-
-## Interpréter les temps
-
-Les mesures ne couvrent pas exactement les mêmes étapes : Hadoop inclut la soumission du job, alors que PySpark exclut la création de la session Spark. L’expérience porte sur une seule machine et au plus un million de lignes.
+Remplacer `m1` par `m10`, `m100` ou `m1000` pour traiter les autres volumes. La
+[version](resultats/version_hadoop.txt) et l’[empreinte de l’image Docker d’origine](resultats/image_hadoop.txt)
+sont fournies avec les journaux.
