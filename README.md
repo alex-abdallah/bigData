@@ -36,7 +36,9 @@ bigData/
 ├── TP2/
 │   ├── README.md                         Analyses et résultats
 │   ├── Road_Crash_PySpark.ipynb             Étude et modèle de gravité
-│   └── data/                             Accidents, unités, empreintes et dictionnaire des champs
+│   ├── data/                              Accidents, unités, empreintes et dictionnaire des champs
+│   ├── modele_gravite_spark/               Pipeline de gravité entraîné et rechargeable
+│   └── exemple_contexte.csv                Contextes d’accident pour tester les prédictions
 └── TP3_ID16/
     ├── README.md                         Démarche des deux études
     ├── Small/
@@ -47,7 +49,8 @@ bigData/
         └── amazon_reviews_dataset/        Corpus d’apprentissage et de test compressé
 ```
 
-Le `PipelineModel` du TP2 et les exports des deux cas du TP3 sont produits à l’exécution. Les fichiers utiles à chaque expérience sont indiqués dans le README du dossier correspondant.
+Le TP2 fournit le `PipelineModel` de l’exécution publiée et un CSV d’exemple. Rejouer le notebook
+produit ses propres exports. Chaque README décrit les fichiers nécessaires à la réexécution.
 
 ## 3. Vérification des consignes de remise
 
@@ -70,7 +73,7 @@ Les phases portent les titres `## [Data]`, `## [EDA]`, `## [Prétraitement]`,
 | TP | Résultat observé |
 |:---|:---|
 | **TP1** | Les quatre méthodes donnent les mêmes occurrences sur cinq volumes, de 1 000 à 10 millions de lignes. PySpark DataFrame atteint une médiane de 1,804 s sur le plus grand fichier dans la série publiée. Le notebook compare aussi les deux modes Hadoop, les cœurs et le cache Spark. |
-| **TP2** | Les trois API concordent sur deux requêtes. En comptant chaque accident une seule fois, la requête sur les unités sans permis donne 2 053 victimes. En 2019, le modèle détecte 253 des 839 accidents graves ou mortels au seuil fixé sur 2018. |
+| **TP2** | Les trois API concordent sur deux requêtes. En comptant chaque accident une seule fois, la requête sur les unités sans permis donne 2 053 victimes. Sur 2019, les arbres boostés détectent 202 des 839 cas graves ou mortels au seuil fixé sur 2018, avec une AUC PR de 0,1352. |
 | **TP3 Small** | PySpark et pandas retrouvent les mêmes effectifs et valeurs manquantes. Sur le dernier mois, le boosting pondéré retrouve 760 fraudes sur 1 428, pour 3 945 fausses alertes et une average precision de 0,2163. |
 | **TP3 Big** | Après dédoublonnage, la régression logistique atteint 90,49 % d’exactitude et 0,9049 de F1 macro sur 399 914 avis du test officiel. |
 
