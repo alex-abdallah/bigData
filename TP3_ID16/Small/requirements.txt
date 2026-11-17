@@ -4,3 +4,4 @@ scikit-learn==1.6.1
 joblib==1.4.2
 ipykernel==6.29.5
 nbconvert==7.16.6
+pyspark==4.0.1

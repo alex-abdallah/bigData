@@ -1,49 +1,62 @@
-# Big Data · Travaux pratiques
+# Big Data — Rendu des TP 1, 2 et 3
 
-**Alex Abdallah** · Polytech Marseille · FISE 5A Informatique
+**Alex Abdallah · ID16** — Polytech Marseille, FISE 5A Informatique
 
-Trois travaux pratiques : comparer des moteurs de calcul, analyser des données avec Spark et construire deux projets data de la lecture des données à la prédiction.
+| Rendu | Sujet | Notebook avec résultats | Documentation |
+|:---|:---|:---|:---|
+| [TP1](TP1/) | Comptage de mots : Python séquentiel, PySpark, Python pseudo-MapReduce et Hadoop MapReduce | [Comptage de mots](TP1/TP_ComptageMots.ipynb) | [Protocole et données](TP1/README.md) |
+| [TP2](TP2/) | Accidents routiers en Australie-Méridionale avec PySpark | [Accidents routiers](TP2/Road_Crash_PySpark.ipynb) | [Sources et déroulé](TP2/README.md) |
+| [TP3_ID16/Small](TP3_ID16/Small/) | Fraude bancaire : traitement Spark et pandas, classification scikit-learn | [Fraude bancaire](TP3_ID16/Small/TP3_small_fraude_bancaire.ipynb) | [Protocole Small](TP3_ID16/README.md#small--fraude-bancaire) |
+| [TP3_ID16/Big](TP3_ID16/Big/) | Sentiment sur quatre millions d’avis Amazon avec PySpark | [Avis Amazon](TP3_ID16/Big/TP3_big_sentiment_amazon_spark.ipynb) | [Protocole Big](TP3_ID16/README.md#big--sentiment-des-avis-amazon) |
 
-| TP | Sujet | Notebooks |
-|:---|:---|:---|
-| [TP1 · Comptage de mots](TP1/) | Python, pseudo-MapReduce, Hadoop et PySpark (RDD et DataFrame) sur quatre volumes. | [Comptage de mots](TP1/TP_ComptageMots.ipynb) |
-| [TP2 · Accidents routiers](TP2/) | Accidents en Australie-Méridionale de 2012 à 2019, avec comparaison des API Spark et analyse de la gravité. | [Road Crash](TP2/Road_Crash_PySpark.ipynb) |
-| [TP3 · Cycle d’un projet data](TP3/) | Fraude bancaire avec pandas et scikit-learn ; sentiment de quatre millions d’avis Amazon avec Spark. | [Small · Fraude](TP3/small/TP3_small_fraude_bancaire.ipynb) · [Big · Avis Amazon](TP3/big/TP3_big_sentiment_amazon_spark.ipynb) |
+Les tableaux et figures sont enregistrés dans les notebooks pour une lecture directe sur GitHub.
+Le TP1 s’ouvre sur le titre, la date et l’identification de l’auteur. Les trois autres notebooks
+commencent par la contribution et suivent les titres `## [Data]`, `## [EDA]`,
+`## [Prétraitement]`, `## [Transformation]`, `## [ML]`, `## [Éval]` et `## [Déploiement]`.
+Chaque notebook se termine par une conclusion et les limites de l’étude.
 
-## Lancer les notebooks
+Les quatre notebooks ont été vérifiés de bout en bout sous Ubuntu WSL (Python 3.12, Java 21,
+Spark 4.0.1), sur les données complètes. Les résultats sont détaillés dans les README de chaque TP.
 
-Utiliser **Python 3.11 ou 3.12** et **Java 17 ou 21**. Pour les notebooks Spark sous Windows, utiliser **Ubuntu dans WSL** et ouvrir le dossier avec VS Code en mode WSL. La lecture des données se fait depuis le dépôt : aucun compte Kaggle ni téléchargement de CSV dans les notebooks.
+## Réexécuter les notebooks
 
-Depuis le dossier `bigData/`, sous Linux ou WSL :
+Utiliser **Linux ou Ubuntu sous WSL**, **Python 3.11 ou 3.12** et un **JDK 17 ou 21** (`java` et `javac`).
+La version de [Spark utilisée est 4.0.1](https://spark.apache.org/docs/4.0.1/).
+Les données nécessaires sont fournies dans le dépôt ; le clonage représente près de 900 Mo de données.
+Les notebooks n’ont pas besoin de compte Kaggle ni de conteneur Docker pour l’exécution standard.
+
+Depuis la racine du dépôt :
 
 ```bash
 java -version
+javac -version
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
 python -m ipykernel install --sys-prefix --name python3
 ```
 
-Ouvrir un notebook dans VS Code (extensions Python et Jupyter), sélectionner le noyau Python de `.venv`, puis cliquer sur **Run All**. Lancer les notebooks un par un. Prévoir plusieurs gigaoctets libres pour les fichiers intermédiaires Spark et, pour le TP3 Big, un environnement disposant d’environ **12 Go de mémoire disponible**. L’étude Big utilise le corpus complet par défaut.
+Dans Jupyter ou VS Code, ouvrir les notebooks avec le noyau de `.venv`, puis lancer toutes les
+cellules. Exécuter les notebooks l’un après l’autre. Le TP3 Big utilise tout le corpus par défaut ;
+prévoir environ 12 Go de mémoire disponible et plusieurs gigaoctets libres pour Spark.
 
 <details>
-<summary>Vérifier les quatre notebooks depuis le terminal</summary>
+<summary>Exécuter les quatre notebooks en ligne de commande</summary>
 
 ```bash
 python -m nbconvert --to notebook --execute --output-dir=/tmp/bigdata-verification \
   --ExecutePreprocessor.timeout=3600 --ExecutePreprocessor.kernel_name=python3 \
   TP1/TP_ComptageMots.ipynb \
   TP2/Road_Crash_PySpark.ipynb \
-  TP3/small/TP3_small_fraude_bancaire.ipynb \
-  TP3/big/TP3_big_sentiment_amazon_spark.ipynb
+  TP3_ID16/Small/TP3_small_fraude_bancaire.ipynb \
+  TP3_ID16/Big/TP3_big_sentiment_amazon_spark.ipynb
 ```
 
-Les copies exécutées vont dans `/tmp/bigdata-verification`. Les modèles et les résultats sont générés à côté de leur notebook.
+Les copies exécutées vont dans `/tmp/bigdata-verification`. Les exports de données et de modèles
+vont par défaut dans `TP2/resultats_road_crash/` et dans le dossier `sorties/` de chaque étude du TP3.
+Définir `BIGDATA_OUTPUT_ROOT` permet de rediriger ces exports vers un répertoire de travail distinct.
 
 </details>
 
-**Vérification :** les quatre notebooks ont été exécutés du début à la fin sous Ubuntu WSL avec Python 3.12, Java 21 et Spark 4.0.1. Le test du TP3 Big a utilisé les quatre millions d’avis en entrée, avec les réglages par défaut.
-
-**TP1 :** le mode par défaut recalcule les deux méthodes Python et les deux méthodes PySpark. Il relit les résultats Hadoop de l’expérience originale et vérifie leurs comptes mot par mot. Le [README du TP1](TP1/README.md) explique comment refaire les mesures Hadoop avec Docker.
-
-**TP3 Big :** pour une démonstration plus courte, définir `TP3_BIG_FRACTION=0.02` avant de démarrer le noyau. Les résultats de cet essai sont écrits dans un dossier séparé.
+La présentation du rendu s’inspire du [dépôt de Batist Aureille](https://github.com/Batigoal13/BigData/tree/main).
+Les sources et les notebooks de départ de chaque étude sont crédités dans leurs dossiers respectifs.
