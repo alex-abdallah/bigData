@@ -32,8 +32,7 @@ bigData/
 │   ├── wordcount_spark.py                 Comptage PySpark en RDD et DataFrame
 │   ├── requirements.txt                  Dépendances du TP1
 │   ├── compose.yaml                      Services de l’expérience HDFS/YARN
-│   ├── data/                             Quatre fichiers fournis, cinquième généré à 10 millions de lignes
-│   └── resultats/                        Journaux et mesures de l’expérience HDFS/YARN
+│   └── data/                             Quatre fichiers fournis, cinquième généré à 10 millions de lignes
 ├── TP2/
 │   ├── README.md                         Analyses et résultats
 │   ├── Road_Crash_PySpark.ipynb             Étude et modèle de gravité

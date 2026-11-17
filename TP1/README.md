@@ -34,7 +34,6 @@ tableaux de mesure.
 | [`requirements.txt`](requirements.txt) | Versions des dépendances Python. |
 | [`compose.yaml`](compose.yaml) et [`config`](config) | Services et paramètres HDFS/YARN. |
 | [`data/`](data/) | Corpus de départ et ses répétitions. |
-| [`resultats/`](resultats/) | Sorties et journaux de la première série HDFS/YARN. |
 
 | Fichier | Répétitions du bloc | Lignes | Taille décimale |
 |:---|---:|---:|---:|
