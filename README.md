@@ -43,10 +43,12 @@ bigData/
     ├── README.md                         Démarche des deux études
     ├── Small/
     │   ├── TP3_small_fraude_bancaire.ipynb
-    │   └── bank_fraud_dataset/             Un million de demandes synthétiques
+    │   ├── bank_fraud_dataset/             Un million de demandes synthétiques
+    │   └── artefacts/                      Modèle Joblib, seuil et exemple de prédiction
     └── Big/
         ├── TP3_big_sentiment_amazon_spark.ipynb
-        └── amazon_reviews_dataset/        Corpus d’apprentissage et de test compressé
+        ├── amazon_reviews_dataset/        Corpus d’apprentissage et de test compressé
+        └── artefacts/                      Pipeline Spark, métriques et exemple de prédiction
 ```
 
 Le TP2 fournit le `PipelineModel` de l’exécution publiée et un CSV d’exemple. Rejouer le notebook
@@ -73,7 +75,7 @@ Transformation, ML, Éval et Déploiement. Une section Conclusion ferme chacun d
 |:---|:---|
 | **TP1** | Les quatre méthodes donnent les mêmes occurrences sur cinq volumes, de 1 000 à 10 millions de lignes. PySpark DataFrame atteint une médiane de 1,804 s sur le plus grand fichier dans la série publiée. Le notebook compare aussi les deux modes Hadoop, les cœurs et le cache Spark. |
 | **TP2** | Les trois API concordent sur deux requêtes. En comptant chaque accident une seule fois, la requête sur les unités sans permis donne 2 053 victimes. Sur 2019, les arbres boostés détectent 202 des 839 cas graves ou mortels au seuil fixé sur 2018, avec une AUC PR de 0,1352. |
-| **TP3 Small** | PySpark et pandas retrouvent les mêmes effectifs et valeurs manquantes. Sur le dernier mois, le boosting pondéré retrouve 760 fraudes sur 1 428, pour 3 945 fausses alertes et une average precision de 0,2163. |
+| **TP3 Small** | PySpark et pandas concordent sur les effectifs, les absences par classe et les agrégats de paiement. Sur le dernier mois, le boosting pondéré retrouve 767 fraudes sur 1 428, pour 4 123 fausses alertes et une average precision de 0,2132. |
 | **TP3 Big** | Après dédoublonnage, la régression logistique atteint 90,49 % d’exactitude et 0,9049 de F1 macro sur 399 914 avis du test officiel. |
 
 ## 5. Réexécuter les notebooks

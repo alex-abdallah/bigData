@@ -8,11 +8,11 @@
     "Taux faux positifs":0.0
   },
   "Boosting pond\u00e9r\u00e9":{
-    "AP":0.2162869258,
-    "AUC ROC":0.8947888195,
-    "Pr\u00e9cision":0.1615302869,
-    "Rappel":0.5322128852,
-    "F1":0.2478395565,
-    "Taux faux positifs":0.0413457004
+    "AP":0.213235154,
+    "AUC ROC":0.8940470209,
+    "Pr\u00e9cision":0.1568507157,
+    "Rappel":0.5371148459,
+    "F1":0.2427983539,
+    "Taux faux positifs":0.0432112351
   }
 }

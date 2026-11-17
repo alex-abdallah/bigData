@@ -32,6 +32,6 @@
     "keep_alive_session",
     "device_distinct_emails_8w"
   ],
-  "seuil_alerte": 0.8096235713928479,
+  "seuil_alerte": 0.8095505850904825,
   "fichier_metriques": "metriques_test.json"
 }
